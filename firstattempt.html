@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+        <html>
+    <head>
+        <title>Rock/Paper/Scissors</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <script>
+            //JS function from click - class data from web server via AJAX
+            function play(strChoice) {
+                event.preventDefault(); //passing event&prevent default. can do checks document.getElementByIDetc
+                //then running AJAX req:
+                var xmlhttp = new XMLHttpRequest();   //this is how AJAX req created
+                xmlhttp.onreadystatechange = function () {   //specifies action if response ready
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("choice").innerHTML = this.responseText;
+                    }//response coming back rom server should go in element with id"choice
+                };
+                xmlhttp.open("GET", "GameFunctions.php?choice=" + strChoice);  //Get request sent via URL. +=concat
+                xmlhttp.send();
+            }
+
+        </script>
+         </head>
+         
+<body>
+
+        <div id="form">
+        <form action="GameFunctions.php" method="GET">
+        <input type="image" src="images/the_rock.jpg" onclick="play('R')" alt="Rock" width="200" height="200"/> 
+        <input type="image" src="images/paper.jpg" onclick="play('P')" alt="Paper" width="200" height="200" />
+        <input type="image" src="images/scissor.jpg" onclick="play('S')" alt="Scissor" width="200" height="200" />
+        </form>
+        </div>
+        
+    <div id="choice"></div>
+    
+        </body>
+
+</html>
